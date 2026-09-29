@@ -49,15 +49,15 @@ function FileUpload() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    <div className="mx-auto max-w-[600px] p-5">
       
       {/* The Attachment Card Preview */}
       {selectedFile && (
-        <div style={styles.card}>
+        <div className="mb-4 flex max-w-[280px] items-center gap-3 rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm">
           {/* Thumbnail / Icon */}
-          <div style={styles.thumbnailContainer}>
+          <div className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-100">
             {selectedFile.type.startsWith('image/') ? (
-              <img src={previewUrl} alt="preview" style={styles.thumbnailImage} />
+              <img src={previewUrl} alt="preview" className="h-full w-full object-cover" />
             ) : (
               /* Generic document icon for audio/video/other */
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -71,13 +71,13 @@ function FileUpload() {
           </div>
 
           {/* File Info (Name + Size) */}
-          <div style={styles.infoContainer}>
-            <div style={styles.fileName}>{selectedFile.name}</div>
-            <div style={styles.fileSize}>{formatFileSize(selectedFile.size)}</div>
+          <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+            <div className="overflow-hidden text-ellipsis whitespace-nowrap text-[13px] font-medium text-gray-900">{selectedFile.name}</div>
+            <div className="text-[11px] text-gray-500">{formatFileSize(selectedFile.size)}</div>
           </div>
 
           {/* Remove Button (X) */}
-          <button onClick={handleRemoveFile} style={styles.removeButton}>
+          <button onClick={handleRemoveFile} className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-gray-100 p-0">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -87,8 +87,8 @@ function FileUpload() {
       )}
 
       {/* Input Area */}
-      <div style={styles.inputArea}>
-        <button onClick={handleFileButtonClick} style={styles.attachButton}>
+      <div className="flex items-center gap-2 rounded-3xl border border-gray-200 bg-white px-3 py-2">
+        <button onClick={handleFileButtonClick} className="flex cursor-pointer items-center border-0 bg-transparent p-1">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
           </svg>
@@ -97,10 +97,10 @@ function FileUpload() {
         <input
           type="text"
           placeholder="What's your car doing?"
-          style={styles.textInput}
+          className="min-w-0 flex-1 border-0 text-sm text-gray-900 outline-none"
         />
 
-        <button style={styles.sendButton}>
+        <button className="flex size-8 cursor-pointer items-center justify-center rounded-full border-0 bg-[#4b8b6e]">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
@@ -113,109 +113,10 @@ function FileUpload() {
         ref={fileInputRef}
         onChange={handleFileChange}
         accept="image/*,audio/*,video/*"
-        style={{ display: 'none' }}
+        className="hidden"
       />
     </div>
   );
 }
-
-// Inline styles to match your screenshot exactly
-const styles = {
-  card: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    padding: '8px 12px',
-    border: '1px solid #e5e7eb',
-    borderRadius: '12px',
-    backgroundColor: '#ffffff',
-    maxWidth: '280px',
-    marginBottom: '16px',
-    boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-  },
-  thumbnailContainer: {
-    width: '36px',
-    height: '36px',
-    borderRadius: '6px',
-    backgroundColor: '#f3f4f6',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    flexShrink: 0,
-  },
-  thumbnailImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-  infoContainer: {
-    flex: 1,
-    minWidth: 0, // Crucial for text-overflow: ellipsis to work
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '2px',
-  },
-  fileName: {
-    fontSize: '13px',
-    fontWeight: '500',
-    color: '#111827',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  fileSize: {
-    fontSize: '11px',
-    color: '#6b7280',
-  },
-  removeButton: {
-    background: '#f3f4f6',
-    border: 'none',
-    borderRadius: '50%',
-    width: '24px',
-    height: '24px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    flexShrink: 0,
-    padding: 0,
-  },
-  inputArea: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    padding: '8px 12px',
-    border: '1px solid #e5e7eb',
-    borderRadius: '24px',
-    backgroundColor: '#ffffff',
-  },
-  attachButton: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    padding: '4px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  textInput: {
-    flex: 1,
-    border: 'none',
-    outline: 'none',
-    fontSize: '14px',
-    color: '#111827',
-  },
-  sendButton: {
-    backgroundColor: '#4b8b6e', // The green from your screenshot
-    border: 'none',
-    borderRadius: '50%',
-    width: '32px',
-    height: '32px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-  },
-};
 
 export default FileUpload;

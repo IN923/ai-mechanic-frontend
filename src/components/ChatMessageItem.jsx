@@ -20,9 +20,8 @@ const ChatMessageItem = ({ message }) => {
         {/* User Message Content Block */}
         <div className="flex flex-col items-end min-w-0">
           <div
-            className={`bg-[#1F4239] text-white text-[14.5px] sm:text-[15px] leading-relaxed font-normal shadow-[0_1px_2px_rgba(0,0,0,0.04)] max-w-full ${hasFile ? 'p-1' : 'px-5 py-3.5'
+            className={`rounded-tl-[18px] rounded-tr-[18px] rounded-br-[4px] rounded-bl-[18px] bg-[#1F4239] text-white text-[14.5px] sm:text-[15px] leading-relaxed font-normal shadow-[0_1px_2px_rgba(0,0,0,0.04)] max-w-full ${hasFile ? 'p-1' : 'px-5 py-3.5'
               }`}
-            style={{ borderRadius: '18px 18px 4px 18px' }}
           >
             {/* {hasFile && (
               <FileBubble
@@ -75,9 +74,8 @@ const ChatMessageItem = ({ message }) => {
       {/* Technician Message Content Block */}
       <div className="flex flex-col items-start min-w-0">
         <div
-          className={`bg-white text-[#2B2D31] border border-[#E8ECEF] text-[14.5px] sm:text-[15px] leading-relaxed font-normal shadow-[0_1px_2px_rgba(0,0,0,0.02)] max-w-full ${hasFile ? 'p-1' : 'px-5 py-3.5'
+          className={`rounded-tl-[18px] rounded-tr-[18px] rounded-br-[18px] rounded-bl-[4px] bg-white text-[#2B2D31] border border-[#E8ECEF] text-[14.5px] sm:text-[15px] leading-relaxed font-normal shadow-[0_1px_2px_rgba(0,0,0,0.02)] max-w-full ${hasFile ? 'p-1' : 'px-5 py-3.5'
             }`}
-          style={{ borderRadius: '18px 18px 18px 4px' }}
         >
           {hasFile && (
             <FileBubble

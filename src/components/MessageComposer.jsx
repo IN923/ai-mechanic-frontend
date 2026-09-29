@@ -10,7 +10,6 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
   const [previewUrl, setPreviewUrl] = useState(null);
   // const [textFile, setTextFile] = useState(null);
   const fileInputRef = useRef(null)
-  // const [attachment,setAttachment] = 
 
   const handleFileButtonClick = (e) => {
     fileInputRef.current?.click();
@@ -63,7 +62,7 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
         <img
           src={previewUrl}
           alt="preview"
-          style={{ maxWidth: 300, maxHeight: 300, borderRadius: 8 }}
+          className="max-h-[300px] max-w-[300px] rounded-lg object-contain"
         />
       );
     }
@@ -77,7 +76,7 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
         <video
           src={previewUrl}
           controls
-          style={{ maxWidth: 400, borderRadius: 8 }}
+          className="max-w-[400px] rounded-lg"
         />
       );
     }
@@ -186,7 +185,7 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
   }
 
   return (
-    <div className="composer-area">
+    <div className="border-t border-[#e0e6e0] bg-[#f7f9f6] px-[108px] pt-4 pb-[15px] max-[760px]:px-[13px] max-[760px]:pt-[13px] max-[760px]:pb-[14px]">
 
       {/* The Attachment Card Preview */}
       {selectedFile && (
@@ -227,19 +226,19 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
         </div>
       )}
 
-      <div className="composer">
+      <div className="flex min-h-14.5 items-end gap-3.25 rounded-2xl border border-[#dce4dc] bg-white py-1.75 pr-2 pl-4.5 shadow-[0_3px_8px_rgba(61,78,68,0.04)] max-[760px]:min-h-[54px] max-[760px]:pl-[14px]">
         <input type='file' ref={fileInputRef} onChange={handleFileChange} className='hidden' />
-        <button className="icon-button attachment-button" type="button" aria-label="Attach a file" onClick={handleFileButtonClick}>
+        <button className="grid size-5.5 shrink-0 place-items-center bg-transparent p-0 text-[#8b9b91] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bd7a2e]" type="button" aria-label="Attach a file" onClick={handleFileButtonClick}>
           <Paperclip size={20} strokeWidth={1.9} />
         </button>
-        <textarea aria-label="Message" placeholder="What's your car doing?" rows={1} ref={textareaRef} onKeyDown={handleKeyDown} onChange={handleMessageChange} value={message} className='max-h-50 min-h-1.5 overflow-y-auto' />
-        <button className="send-button"
+        <textarea aria-label="Message" placeholder="What's your car doing?" rows={1} ref={textareaRef} onKeyDown={handleKeyDown} onChange={handleMessageChange} value={message} className="max-h-[200px] min-h-[26px] w-full resize-none overflow-y-auto border-0 bg-transparent text-[13px] leading-[26px] text-[#44544c] outline-none placeholder:text-[#75847b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bd7a2e]" />
+        <button className="grid size-10 shrink-0 place-items-center rounded-xl border-0 bg-[#e3eae3] text-[#9eaba1] transition-colors hover:bg-[#d6e3d8] hover:text-[#536d5d] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bd7a2e]"
           type="button" aria-label="Send message" onClick={SendMessage}>
           <ArrowUp size={20} strokeWidth={2.1} />
         </button>
       </div>
-      {error && <p className="error">{error}</p>}
-      <p className="keyboard-hint">
+      {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
+      <p className="mt-2.25 ml-0.75 flex gap-2.25 text-[10px] text-[#9aa59d]">
         <span>Enter to send</span>
         <span aria-hidden="true">·</span>
         <span>Shift + Enter for a new line</span>
