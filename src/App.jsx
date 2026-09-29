@@ -40,6 +40,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   // const [file, setFile] = useState('')
   const [isdiagnose, setIsDiagnose] = useState(false)
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     console.log("messages innnnnn", messages)
@@ -49,8 +50,8 @@ function App() {
     <main className="h-screen min-w-[320px] w-full flex flex-col justify-center bg-[#f4f6f2] px-5 pt-6 pb-4.5 font-['DM_Sans',sans-serif] text-[#34423d] antialiased max-[760px]:justify-start max-[760px]:px-[10px] max-[760px]:py-3">
       <section className="flex flex-1 min-h-0 flex-col overflow-hidden rounded-[22px] border border-[#dce3dc] bg-[#fbfcfa] shadow-[0_18px_48px_rgba(61,78,68,0.09)] max-[760px]:rounded-[17px]" aria-label="Mechanic support chat">
         <ChatHeader />
-        <Conversation messages={messages} isdiagnose={isdiagnose} setMessages={setMessages} />
-        <MessageComposer setMessages={setMessages} setIsDiagnose={setIsDiagnose} isdiagnose={isdiagnose} />
+        <Conversation messages={messages} isdiagnose={isdiagnose} setMessages={setMessages} isTyping={isTyping} />
+        <MessageComposer setMessages={setMessages} setIsTyping={setIsTyping} setIsDiagnose={setIsDiagnose} isdiagnose={isdiagnose} />
       </section>
       <PageFooter />
     </main>

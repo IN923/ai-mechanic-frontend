@@ -1,7 +1,7 @@
 import { ArrowUp, Paperclip, FileText, X } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import axiosClient from '../api/axiosClient';
-export default function MessageComposer({ setMessages,setIsDiagnose }) {
+export default function MessageComposer({ setMessages, setIsDiagnose, setIsTyping }) {
 
   const [message, setMessage] = useState('')
   const [error, setError] = useState(null)
@@ -10,6 +10,7 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
   const [previewUrl, setPreviewUrl] = useState(null);
   // const [textFile, setTextFile] = useState(null);
   const fileInputRef = useRef(null)
+  // const [isTyping, setIsTyping] = useState(false)
 
   const handleFileButtonClick = (e) => {
     fileInputRef.current?.click();
@@ -121,7 +122,7 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
   };
 
   const SendMessage = async (e) => {
-
+    setIsTyping(true)
     const conversation_id = localStorage.getItem('conversation_id') || ''
 
     let gemini_query;
@@ -147,30 +148,34 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
       }
     }
 
-    console.log("fileidddddd=",fileId)
+    console.log("fileidddddd=", fileId)
 
     if (!conversation_id) {
       gemini_query = axiosClient.post('/api/chat/', {
-        conversation_id:conversation_id,
-        message: message,
-        file_id: fileId||''
-      });
-    }
-    else {
-      gemini_query = axiosClient.post(`/api/chat/`, {
-        conversation_id:conversation_id,
+        conversation_id: conversation_id,
         message: message,
         file_id: fileId || ''
       });
     }
-
+    else {
+      gemini_query = axiosClient.post(`/api/chat/`, {
+        conversation_id: conversation_id,
+        message: message,
+        file_id: fileId || ''
+      });
+    }
+    setMessage('')
+    if (selectedFile) {
+      setSelectedFile(null)
+      setPreviewUrl(null)
+    }
     console.log("gemini query=", gemini_query)
 
     try {
       const response = await gemini_query;
       console.log('Response:', response.data);
       if (response.data.output[2]['conversation_id']) {
-        localStorage.setItem('conversation_id',response.data.output[2]['conversation_id']);
+        localStorage.setItem('conversation_id', response.data.output[2]['conversation_id']);
       }
       console.log("output=", typeof (response.data.output[0]), typeof setMessages)
       setMessages((initialMessages) => {
@@ -181,6 +186,13 @@ export default function MessageComposer({ setMessages,setIsDiagnose }) {
     } catch (error) {
       console.error('Error sending message:', error);
       setError('Failed to send message');
+    } finally {
+      setIsTyping(false)
+      // if(selectedFile){
+      //   setSelectedFile(null)
+      //   setPreviewUrl(null)
+      // }
+      // setMessage('')
     }
   }
 

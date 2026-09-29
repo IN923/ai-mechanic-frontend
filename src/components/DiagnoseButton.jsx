@@ -9,8 +9,9 @@ export default function DiagnoseButton({ isdiagnose,setMessages }) {
     const response = await axios.post('/api/diagnose/',{
       conversation_id:conversation_id
     })
-
+    console.log("diagnose response=",response.data)
     setMessages((initialMessages)=>([...initialMessages,response.data]))
+    
   }
 
   return (
